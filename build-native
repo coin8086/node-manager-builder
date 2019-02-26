@@ -43,6 +43,7 @@ if [[ -d "$release" ]]; then
 fi
 cp -a src/"$nodemanager"/bin/release "$release" &&
   cp -a src/"$cpprestsdk_release"/build.release/Binaries/libcpprest.so* "$release"/lib/ &&
+  cp -a /usr/lib/x86_64-linux-gnu/libboost_system.so* "$release"/lib/
   cp -a /usr/lib/x86_64-linux-gnu/libboost_thread.so* "$release"/lib/
   cp -a /lib/x86_64-linux-gnu/* "$release"/lib/
 
