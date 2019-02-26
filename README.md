@@ -36,3 +36,8 @@ Make a Docker image by the file under `docker-image`. Name it `nm-builder`. Then
 ## Get Build Result
 
 Build result will be put at `release` dir, with all dependencies, be it glibc, boost, or cpprestsdk.
+
+## TODO
+
+* Push the docker image so you don't need to build one and only pull it from anywhere.
+* Get *correct* source code automatically
