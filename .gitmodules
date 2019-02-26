@@ -1,0 +1,10 @@
+[submodule "src/cpprestsdk"]
+	path = src/cpprestsdk
+	url = https://github.com/EvanCui/cpprestsdk.git
+[submodule "src/spdlog"]
+	path = src/spdlog
+	url = https://github.com/EvanCui/spdlog.git
+[submodule "src/whpc-linux-communicator"]
+	path = src/whpc-linux-communicator
+	url = https://github.com/coolmay/whpc-linux-communicator.git
+	branch = v2
