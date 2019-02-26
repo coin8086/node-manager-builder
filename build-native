@@ -18,7 +18,7 @@ if [[ ! -d build.release ]]; then
 fi
 cd build.release
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j 4 -l 4
+make -j$(nproc)
 
 if [[ "$?" != 0 ]]; then
   echo "Failed building C++ REST SDK!"
@@ -28,7 +28,7 @@ fi
 echo "Building Node Manager..."
 
 cd "$wd"/src/"$nodemanager"
-make release
+make release -j$(nproc)
 
 if [[ "$?" != 0 ]]; then
   echo "Failed building Node Manager!"
