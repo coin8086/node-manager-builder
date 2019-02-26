@@ -1,0 +1,6 @@
+#!/bin/bash
+
+wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+docker run -t --mount type=bind,source="$wd",target=/app nm-builder ./build-native
+docker container prune -f

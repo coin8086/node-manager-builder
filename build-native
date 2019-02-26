@@ -1,0 +1,49 @@
+#!/bin/bash
+
+wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cpprestsdk_repo=https://github.com/EvanCui/cpprestsdk.git
+cpprestsdk=cpprestsdk
+cpprestsdk_release="$cpprestsdk/Release"
+nodemanager=whpc-linux-communicator/nodemanager
+release=release
+
+# For how to build cpprestsdk(v2.8), refer to
+# https://github.com/Microsoft/cpprestsdk/wiki/How-to-build-for-Linux/4a88f88bf7cb51799bf15f53df30b2193dded82c
+
+echo "Building C++ REST SDK..."
+
+cd "$wd"/src/"$cpprestsdk_release"
+if [[ ! -d build.release ]]; then
+  mkdir build.release
+fi
+cd build.release
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j 4 -l 4
+
+if [[ "$?" != 0 ]]; then
+  echo "Failed building C++ REST SDK!"
+  exit 1
+fi
+
+echo "Building Node Manager..."
+
+cd "$wd"/src/"$nodemanager"
+make release
+
+if [[ "$?" != 0 ]]; then
+  echo "Failed building Node Manager!"
+  exit 1
+fi
+
+echo "Copying files..."
+
+cd "$wd"
+if [[ -d "$release" ]]; then
+  rm -rf "$release"
+fi
+cp -a src/"$nodemanager"/bin/release "$release" &&
+  cp -a src/"$cpprestsdk_release"/build.release/Binaries/libcpprest.so* "$release"/lib/ &&
+  cp -a /usr/lib/x86_64-linux-gnu/libboost_thread.so* "$release"/lib/
+  cp -a /lib/x86_64-linux-gnu/* "$release"/lib/
+
+echo "OK"
