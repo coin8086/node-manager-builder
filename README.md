@@ -4,8 +4,7 @@ Build [HPC Pack Linux Node Manager](https://github.com/coolmay/whpc-linux-commun
 
 ```bash
 git clone --recursive https://github.com/coin8086/node-manager-builder.git
-cd node-manager-builder/src/whpc-linux-communicator
-git 
+cd node-manager-builder
 ./build-in-docker
 ```
 
