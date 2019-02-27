@@ -30,12 +30,22 @@ echo "Building Node Manager..."
 cd "$wd"/src/"$nodemanager"
 make release -j$(nproc)
 
+echo "Waiting for build result to be persistent on disk..."
+while [[ ! -f bin/release/nodemanager  ]]; do
+  printf .
+  sleep 1
+done
+printf '\n'
+
+echo "Making again to collect dependent libraries..."
+make release
+
 if [[ "$?" != 0 ]]; then
   echo "Failed building Node Manager!"
   exit 1
 fi
 
-echo "Copying files..."
+echo "Generating release..."
 
 cd "$wd"
 if [[ -d "$release" ]]; then
