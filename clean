@@ -5,7 +5,7 @@ wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$wd"/src
 
 for d in *; do
-  if [[ -d "$d" ]] && [[ -d "$d"/.git ]]; then
+  if [[ -d "$d" ]] && [[ -a "$d"/.git ]]; then
     cd "$d"
     echo "Cleaning ${d}..."
     git clean -xdf
